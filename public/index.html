@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebRTC Demo</title>
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Optional: Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@700;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">
+        360<span>Campus</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Materials</a></li>
+          <li><a href="#">Events</a></li>
+          <li><a href="#" class="time-table-link">Time Table</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- Landing Page -->
+    <div id="landing" style="text-align: center; margin-top: 40px;">
+      <h2>Welcome to WebRTC Demo</h2>
+      <p>Please select an option:</p>
+      <button id="createMeetingBtn" style="margin: 10px; padding: 10px 20px;">Create a Meeting</button>
+      <button id="joinMeetingBtn" style="margin: 10px; padding: 10px 20px;">Join a Meeting</button>
+    </div>
+
+    <!-- Create Meeting Section -->
+    <div id="createSection" style="display: none; max-width: 600px; margin: 20px auto; border: 2px solid #201887; border-radius: 8px; padding: 20px; background-color: #fff;">
+      <h3>Create Meeting</h3>
+      <input type="text" id="createName" placeholder="Enter your name" style="width: calc(100% - 20px); margin-bottom: 10px;">
+      <button id="createNowBtn">Create Now</button>
+    </div>
+
+    <!-- Join Meeting Section -->
+    <div id="joinSection" style="display: none; max-width: 600px; margin: 20px auto; border: 2px solid #201887; border-radius: 8px; padding: 20px; background-color: #fff;">
+      <h3>Join Meeting</h3>
+      <input type="text" id="joinName" placeholder="Enter your name" style="width: calc(100% - 20px); margin-bottom: 10px;">
+      <input type="text" id="joinId" placeholder="Enter 9-digit meeting ID" style="width: calc(100% - 20px); margin-bottom: 10px;">
+      <button id="joinNowBtn">Join Now</button>
+    </div>
+
+    <!-- Meeting UI -->
+    <div class="webrtc-container" id="meetingContainer" style="display: none;">
+      <!-- Left Side: Device Settings and Participant List -->
+      <div class="webrtc-sidebar">
+        <!-- Device Settings Menu -->
+        <div id="deviceSettings" style="margin-bottom: 20px; display: none;">
+          <label for="cameraSelect">Camera:</label>
+          <select id="cameraSelect"></select>
+          <br>
+          <label for="micSelect">Microphone:</label>
+          <select id="micSelect"></select>
+          <br>
+          <button id="muteMicBtn">Mute Mic</button>
+        </div>
+        <!-- Participant List -->
+        <div class="webrtc-participantList" id="participantList">
+          <h3>Participants</h3>
+          <ul id="participantUl"></ul>
+        </div>
+      </div>
+
+      <!-- Main Display -->
+      <div class="webrtc-main" id="mainDisplay">
+        <h3>Meeting ID: <span id="meetingIdDisplay"></span></h3>
+        <video id="mainVideo" class="webrtc-video" autoplay muted></video>
+        <p id="mainName"></p>
+        <div id="controls" style="display: none;">
+          <button id="shareScreenBtn" style="display: none;">Share Screen</button>
+          <button id="stopScreenBtn" style="display: none;">Stop Sharing</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enable Media Button -->
+    <div id="enableMediaDiv" style="display: none; max-width: 600px; margin: 20px auto; text-align: center;">
+      <button id="enableMediaBtn">Enable Media (Mic/Camera if allowed)</button>
+    </div>
+
+    <!-- Chat Section -->
+    <div id="chatSection" style="display: none;">
+      <div id="chat"></div>
+      <input type="text" id="chatInput" placeholder="Type a message...">
+      <button id="sendChatBtn">Send</button>
+    </div>
+
+    <!-- Modal for Viewing Video -->
+    <div id="videoModal">
+      <div id="modalContent">
+        <button id="closeModal">Close</button>
+        <video id="modalVideo" autoplay></video>
+        <p id="modalName"></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>360Campus</h4>
+        <p>Get Trusted Support From Anywhere</p>
+        <p>(Optional) Quick tagline or mission statement here.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <p>Home</p>
+        <p>Materials</p>
+        <p>Events</p>
+        <p>Graduation Projects</p>
+      </div>
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <p>Time Table</p>
+        <p>My Class</p>
+        <p>Faculty</p>
+        <p>Levels & Semesters</p>
+      </div>
+      <div class="footer-column">
+        <h4>Contact Us</h4>
+        <p>Email: info@360campus.edu</p>
+        <p>Phone: +123 456 789</p>
+        <p>Address: 1234 Campus Way</p>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <p>Copyright © 2022 Virtuelly</p>
+      <p>Designed by TokoTema</p>
+    </div>
+  </footer>
+
+  <!-- Socket.IO and Client Script -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
